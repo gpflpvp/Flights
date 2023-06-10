@@ -1,0 +1,137 @@
+<h5 class="text-md-center m-5 ">Search for Flights</h5>
+
+<form [formGroup]="searchForm" (ngSubmit)="search()">
+  <div class="m-5 d-grid gap-3">
+
+    <div class="row">
+      <div class="col">
+        <div class="form-floating">
+          <input formControlName="from" class="form-control" placeholder="From" />
+          <label class="text-primary form-label">From</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <input formControlName="destination" class="form-control" placeholder="To" />
+          <label class="text-primary form-label">Destination</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col">
+        <div class="form-floating">
+          <input formControlName="fromDate" type="date" class="form-control" placeholder="From Date" />
+          <label class="text-primary form-label">From Date</label>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-floating">
+          <input formControlDate="toDate" type="date" class="form-control" placeholder="To Date" />
+          <label class="text-primary form-label">To Date</label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col text-end">
+        <label class="text-primary mt-2 form-label"><strong>Number of Passengers</strong></label>
+
+      </div>
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-text">For</div>
+          <input formControlName="numberOfPassengers" class="form-control" placeholder="1" type="number" />
+          <div class="input-group-text">Passengers</div>
+          <button type="submit" class="btn-primary btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</form>
+
+
+
+
+
+
+<div *ngFor="let flight of searchResult">
+
+  <div class="card text-dark mt-5 text-center" style="padding:20px; background-color:#e5ecf26e">
+    <div class="card-body">
+      <h6 class="card-title">{{flight.airline}}</h6>
+      <div class="card-title" style="color:#ff3939;">
+      {{flight.remainingNumberOfSeats}} remaining seats</div>
+    </div>
+
+    <div class="d-grid text-center g-2">
+      <div class="row">
+
+        <div class="col">
+
+          <div class="col m-3">
+            <i class="text-primary fas fa-plane-departure" style="font-size: 20px"></i>
+          </div>
+
+          <div class="col">
+            <i class="fa-solid fa-location-dot"> {{flight.departure?.place}}</i>
+          </div>
+
+          <div class="col m-2">
+            <i class="fa-regular">{{flight.departure?.time | date}}</i>
+          </div>
+
+          <div class="col">
+            <i class="fa-regular fa-clock"> {{flight.departure?.time | date: 'shortTime'}}</i>
+          </div>
+
+
+        </div>
+
+        <div class="col">
+          <div style="display:flex;">
+            <i class="fa-solid fa-circle" style="margin-top:50px; font-size:9px;"></i>
+            <hr style="display:block; width: 100%; margin-top:55px;" />
+            <i class=" fas fa-plane" style="margin-top:48px;"></i>
+          </div>
+
+          <i class="fas fa-usd">{{flight.price}}</i>
+          <br />
+          <a [routerLink]="['/book-flight',flight.id]" class="btn btn-primary btn-lg mt-2">
+            <i class="fas fa-ticket"></i>
+            Book
+          </a>
+        </div>
+
+        <div class="col">
+          <div class="col m-3">
+            <i class="text-primary fas fa-plane-departure" style="font-size: 20px"></i>
+          </div>
+
+          <div class="col">
+            <i class="fa-solid fa-location-dot"> {{flight.arrival?.place}}</i>
+          </div>
+
+          <div class="col m-2">
+            <i class="fa-regular">{{flight.arrival?.time | date}}</i>
+          </div>
+
+          <div class="col">
+            <i class="fa-regular fa-clock"> {{flight.arrival?.time | date: 'shortTime'}}</i>
+          </div>
+        </div>
+
+      </div>
+      </div>
+
+  </div>
+
+ 
+</div>
